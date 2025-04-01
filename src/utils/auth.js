@@ -1,20 +1,20 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const saveLoginState = async (isLoggedIn) => {
-  try {
-    await AsyncStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
-  } catch (error) {
-    console.log('Error saving login state:', error);
-  }
-};
-
 export const getLoginState = async () => {
   try {
     const value = await AsyncStorage.getItem('isLoggedIn');
-    return value !== null ? JSON.parse(value) : false;
+    return value === 'true';
   } catch (error) {
-    console.log('Error getting login state:', error);
+    console.error('Error getting login state:', error);
     return false;
+  }
+};
+
+export const saveLoginState = async (state) => {
+  try {
+    await AsyncStorage.setItem('isLoggedIn', state.toString());
+  } catch (error) {
+    console.error('Error saving login state:', error);
   }
 };
 
@@ -22,6 +22,6 @@ export const clearLoginState = async () => {
   try {
     await AsyncStorage.removeItem('isLoggedIn');
   } catch (error) {
-    console.log('Error clearing login state:', error);
+    console.error('Error clearing login state:', error);
   }
 };

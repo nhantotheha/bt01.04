@@ -38,7 +38,7 @@ const TabNavigator = () => {
 const AppNavigator = ({ isLoggedIn, setIsLoggedIn }) => {
   const handleSignOut = async () => {
     await saveLoginState(false);
-    setIsLoggedIn(false);
+    setIsLoggedIn(false); // Đồng bộ state trong App.js
   };
 
   return (
